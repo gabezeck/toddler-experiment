@@ -18,6 +18,16 @@ export default function Home() {
   const [thinkingVisibility, setThinkingVisibility] = useState<boolean[]>([])
   const chatContainerRef = useRef<HTMLDivElement>(null)
 
+  const downloadChat = () => {
+    const chat = conversation.map((msg) => parseMessage(msg).message).join('\n')
+    const blob = new Blob([chat], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'chat.txt'
+    a.click()
+  }
+
   const startChat = async () => {
     setIsChatting(true)
     setConversation([])
@@ -65,8 +75,6 @@ export default function Home() {
   const stopChat = async () => {
     await fetch('/api/stop-chat')
     setIsChatting(false)
-    setConversation([])
-    setThinkingVisibility([])
   }
 
   useEffect(() => {
@@ -146,7 +154,7 @@ export default function Home() {
             type='button'
             onClick={startChat}
             disabled={isChatting}
-            className='w-full p-4 text-white bg-blue-500 rounded hover:bg-blue-600 disabled:bg-gray-400'
+            className='cursor-pointer w-full p-4 text-white bg-blue-500 rounded hover:bg-blue-600 disabled:bg-gray-400'
           >
             Start Chat
           </button>
@@ -154,9 +162,29 @@ export default function Home() {
             type='button'
             onClick={stopChat}
             disabled={!isChatting}
-            className='w-full p-4 text-white bg-red-500 rounded hover:bg-red-600 disabled:bg-gray-400'
+            className='cursor-pointer w-full p-4 text-white bg-red-500 rounded hover:bg-red-600 disabled:bg-gray-400'
           >
             Stop Chat
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              setConversation([])
+              setThinkingVisibility([])
+            }}
+            disabled={conversation.length === 0}
+            className='cursor-pointer w-full p-4 text-white bg-gray-500 rounded hover:bg-gray-600 disabled:bg-gray-400'
+          >
+            Clear Chat
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              downloadChat()
+            }}
+            className='cursor-pointer w-full p-4 text-white bg-gray-500 rounded hover:bg-gray-600 disabled:bg-gray-400'
+          >
+            Save Chat
           </button>
         </div>
       </div>
