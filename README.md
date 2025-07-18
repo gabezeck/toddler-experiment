@@ -16,7 +16,7 @@ The frontend allows users to specify custom agent personalities and names, so ot
 
 The project consists of two main parts:
 
--   **Backend:** A Python application built with the [`pyautogen`](https://github.com/microsoft/autogen) framework. It manages the AI agents, including the `WebSurferAgent`. It is responsible for orchestrating the conversation flow.
+-   **Backend:** A Python application built with the [`ag2`](https://github.com/microsoft/autogen) framework. It manages the AI agents, including the `WebSurferAgent`. It is responsible for orchestrating the conversation flow.
 -   **Frontend:** A [Next.js](https://nextjs.org/) application that provides a user-friendly interface for configuring and observing the AI agent conversations. It communicates with the backend via API routes.
 
 When a chat is started from the frontend:
@@ -53,7 +53,7 @@ When a chat is started from the frontend:
     ```
 
 4.  **Configure your LLM provider:**
-    This project uses `pyautogen` which supports various LLM providers. The configuration is stored in the `OAI_CONFIG_LIST` file at the root of the project. You need to create this file and add your LLM configuration.
+    This project uses `ag2` which supports various LLM providers. The configuration is stored in the `OAI_CONFIG_LIST` file at the root of the project. You need to create this file and add your LLM configuration.
 
     For example, to use a Google Gemini model, create a file named `OAI_CONFIG_LIST` with the following content, replacing `"YOUR_API_KEY"` with your actual Google AI API key:
 
