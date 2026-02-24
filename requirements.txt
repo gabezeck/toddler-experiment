@@ -1,2 +1,2 @@
-pyautogen[websurfer,gemini]
+pyautogen[websurfer,gemini,openai]
 playwright
