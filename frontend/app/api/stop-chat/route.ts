@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 let pythonProcess: import("child_process").ChildProcess | null = null;
 
-export async function GET() {
+export async function POST() {
   if (pythonProcess) {
     pythonProcess.kill();
     pythonProcess = null;

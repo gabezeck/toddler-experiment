@@ -1,124 +1,245 @@
-# Toddler Experiment
+# DialogFlow AI
 
-This repository hosts an application that facilitates a conversation between two AI agents. The default experiment simulates a conversation between two toddler-like AI personalities working together to learn about the world. They are assisted by a third "browser" agent that can look up information for them.
+<div align="center">
 
-The frontend allows users to specify custom agent personalities and names, so other experiments are possible.
+![Watch AI Agents Think, Debate, and Create](https://img.shields.io/badge/Watch-AI_Agents_Think%2C_Debate%2C_and_Create-purple?style=for-the-badge)
+
+**A beautifully crafted tool for exploring AI agent conversations with delightful UX**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://www.python.org/)
+
+<!-- DEMO GIF PLACEHOLDER: Add your animated GIF here -->
+<!-- 
+<img src="public/demo.gif" alt="DialogFlow AI Demo" width="800">
+-->
+*[Demo GIF coming soon]*
+
+</div>
+
+---
 
 ## Features
 
--   **Multi-Agent Conversations:** Simulates conversations between two configurable AI agents.
--   **Web Surfing Agent:** An autonomous web browsing agent assists the primary agents by looking up information online.
--   **Customizable Personas:** Easily configure the names and personalities (system prompts) of the agents through the web interface.
--   **Real-time Streaming:** Conversations are streamed from the backend to the frontend in real-time.
--   **Thinking Process Visibility:** See the "thoughts" of the agents before they produce a response.
+### 🎭 Conversation Presets
+Start exploring immediately with built-in scenarios:
+- **Curious Toddlers** - Two 4-year-olds learning together
+- **Tech vs Humanity** - Technocrat vs Humanist debate
+- **Historical Figures** - Any two historical figures
+- **Creative Partners** - Two writers brainstorming
+- **Philosophy Salon** - Ethicists debating morality
 
-## How it Works
+### 💬 Real-Time Conversation View
+- Watch agents think before they speak with expandable thought panels
+- Smooth message entrance animations
+- Typing indicators show when agents are generating
+- Turn counter tracks conversation progress
 
-The project consists of two main parts:
+### 🎨 Modern Design
+- Beautiful glassmorphism UI with gradient accents
+- Dark/light mode with smooth transitions
+- Responsive mobile layout
+- Custom scrollbars and polished interactions
 
--   **Backend:** A Python application built with the [`pyautogen`](https://github.com/microsoft/autogen) framework. It manages the AI agents, including the `WebSurferAgent`. It is responsible for orchestrating the conversation flow.
--   **Frontend:** A [Next.js](https://nextjs.org/) application that provides a user-friendly interface for configuring and observing the AI agent conversations. It communicates with the backend via API routes.
+### 📚 History & Export
+- Auto-save conversations to browser storage
+- Star favorites for quick access
+- Export to JSON (full data) or Markdown (readable)
+- Search through saved conversations
 
-When a chat is started from the frontend:
-1. The agent configurations are sent to a Next.js API route.
-2. The API route writes the configuration to `config.json` and starts the Python backend process (`main.py`).
-3. The Python process runs the autogen simulation.
-4. The output of the simulation is streamed back to the frontend and displayed in the conversation view.
+### ⚙️ Custom Configuration
+- Create custom agent personalities
+- Adjust conversation parameters
+- Pause/resume conversations
+- Create and save your own presets
 
-## Getting Started
+---
+
+## Quick Start
+
+Get started in less than 30 seconds:
+
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/yourusername/toddler-experiment.git
+   cd toddler-experiment/frontend
+   pnpm install
+   ```
+
+2. **Configure your API key**
+   ```bash
+   # Copy .env.example to .env and add your OpenAI API key
+   cp ../.env.example .env
+   # Edit .env and add: OPENAI_API_KEY=sk-your-key-here
+   ```
+
+3. **Start the development server**
+   ```bash
+   pnpm dev
+   ```
+
+4. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+5. **Select a preset and start chatting!**
+
+---
+
+## Installation
 
 ### Prerequisites
+- **Node.js** 18+ ([Download](https://nodejs.org/))
+- **pnpm** 8+ (`npm install -g pnpm`)
+- **Python** 3.9+ ([Download](https://www.python.org/))
+- **OpenAI API key** ([Get one](https://platform.openai.com/api-keys))
 
--   [Node.js](https://nodejs.org/) (v20 or later)
--   [pnpm](https://pnpm.io/)
--   [Python](https://www.python.org/) (v3.9 or later)
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/toddler-experiment.git
-    cd toddler-experiment
-    ```
-
-2.  **Install backend dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **Install Playwright browsers:**
-    The `WebSurferAgent` uses Playwright for browser automation. You need to install the required browser binaries.
-    ```bash
-    playwright install
-    ```
-
-4.  **Configure your LLM provider:**
-    This project uses `pyautogen` which supports various LLM providers. The configuration is stored in the `OAI_CONFIG_LIST` file at the root of the project. You need to create this file and add your LLM configuration.
-
-    For example, to use a Google Gemini model, create a file named `OAI_CONFIG_LIST` with the following content, replacing `"YOUR_API_KEY"` with your actual Google AI API key:
-
-    ```json
-    [
-        {
-            "model": "gemini-1.5-flash",
-            "api_key": "YOUR_API_KEY",
-            "api_type": "google"
-        }
-    ]
-    ```
-
-    You can also configure it to use OpenAI or other models supported by autogen. Please refer to the [autogen documentation](https://microsoft.github.io/autogen/docs/installation/#openai-api-key-and-llm-configuration) for more details.
-
-5.  **Install frontend dependencies:**
-    ```bash
-    cd frontend
-    pnpm install
-    ```
-
-## Usage
-
-1.  **Start the frontend development server:**
-    ```bash
-    cd frontend
-    pnpm dev
-    ```
-
-2.  **Open the application:**
-    Open your web browser and navigate to [http://localhost:3000](http://localhost:3000).
-
-3.  **Configure and start the chat:**
-    - You can modify the agent names, system prompts, and the initial message in the text fields.
-    - Click "Start Chat" to begin the conversation.
-    - The conversation will be displayed in the "Conversation" panel.
-    - Click "Stop Chat" to terminate the experiment.
-
-## Project Structure
-
+### Frontend Setup
+```bash
+cd frontend
+pnpm install
 ```
-.
-├── frontend/             # Next.js frontend application
+
+### Backend Setup
+```bash
+# From project root
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# Install Playwright browsers (for web-surfing agent)
+playwright install
+```
+
+### Environment Configuration
+Create a `.env` file in the frontend directory:
+```bash
+OPENAI_API_KEY=sk-your-key-here
+OPENAI_MODEL=gpt-4
+```
+
+---
+
+## Development
+
+### Running Development Servers
+
+**Frontend:**
+```bash
+cd frontend
+pnpm dev
+```
+Opens at [http://localhost:3000](http://localhost:3000)
+
+**Backend (Python):**
+The backend is automatically started by the Next.js API when you begin a chat from the frontend.
+
+### Verification Script
+Run the setup verification to ensure everything is configured:
+```bash
+node scripts/verify-setup.js
+```
+
+### Project Structure
+```
+toddler-experiment/
+├── frontend/              # Next.js frontend application
 │   ├── app/              # App Router directory
-│   │   ├── api/          # API routes for starting/stopping chat
-│   │   └── page.tsx      # Main page component
-│   ├── package.json
-│   └── ...
-├── main.py               # Backend Python script for the autogen experiment
-├── config.json           # Configuration for the agents (managed by the frontend)
-├── OAI_CONFIG_LIST       # LLM provider configuration (you need to create this)
+│   ├── components/       # React components
+│   ├── lib/              # Utilities and helpers
+│   └── stores/           # Zustand state management
+├── main.py               # Backend Python script
+├── config.json           # Agent configuration
 ├── requirements.txt      # Python dependencies
-└── README.md             # This file
+└── scripts/              # Setup and utility scripts
 ```
+
+### Tech Stack
+- **Frontend:** Next.js 16, React, TypeScript, Tailwind CSS, Framer Motion
+- **State:** Zustand
+- **Backend:** Python, pyautogen, Playwright
+- **Styling:** Tailwind CSS v4 with custom design tokens
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please feel free to open an issue or submit a pull request.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
+- Development setup
+- Code style guidelines
+- Pull request process
+- Getting help
 
-1.  Fork the repository.
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
+**Quick start for contributors:**
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes with clear commits
+4. Submit a pull request with a description
+
+---
+
+## Screenshots
+
+<!-- 
+Add screenshots here showing:
+1. Preset selection screen
+2. Active conversation with thinking panels
+3. History drawer
+4. Theme toggle
+
+Example:
+<img src="public/screenshot-1.png" alt="Preset Selection" width="400">
+-->
+
+*Screenshots coming soon*
+
+---
+
+## Troubleshooting
+
+### "OpenAI API key not found"
+- Ensure `.env` file exists in the `frontend/` directory
+- Verify it contains `OPENAI_API_KEY=sk-...`
+- Restart the development server after creating `.env`
+
+### "Python not found"
+- Ensure Python 3.9+ is installed and in your PATH
+- On Windows, you may need to restart your terminal after installing Python
+
+### "Playwright browser not found"
+- Run `playwright install` from the project root
+- This downloads the browser binaries needed for web-surfing
+
+### "Port 3000 already in use"
+- Either stop the process using port 3000, or
+- Run `pnpm dev -- -p 3001` to use a different port
+
+### Conversation freezes
+- Check the browser console for errors
+- Verify your OpenAI API key has credits available
+- Try reducing `max_round` in the configuration
+
+For more help, please [open an issue](https://github.com/yourusername/toddler-experiment/issues/new).
+
+---
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+Built with [pyautogen](https://github.com/microsoft/autogen) by Microsoft
+
+---
+
+<div align="center">
+
+**Made with ❤️ for the AI community**
+
+[⭐ Star us on GitHub](https://github.com/yourusername/toddler-experiment) • [🐛 Report a Bug](https://github.com/yourusername/toddler-experiment/issues/new) • [💡 Request a Feature](https://github.com/yourusername/toddler-experiment/issues/new)
+
+</div>

@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import { type ChildProcess, spawn } from 'child_process';
+import path from 'path';
 
 let pythonProcess: ChildProcess | null = null;
 
@@ -16,9 +17,19 @@ export async function POST(req: NextRequest) {
     initialMessage,
   };
 
-  await fs.writeFile('../config.json', JSON.stringify(config, null, 2));
+  // Resolve absolute paths
+  const projectRoot = path.resolve(process.cwd(), '..');
+  const configPath = path.join(projectRoot, 'config.json');
+  const pythonPath = path.join(projectRoot, '.venv', 'bin', 'python');
+  const mainPyPath = path.join(projectRoot, 'main.py');
 
-  pythonProcess = spawn('python3', ['main.py'], { cwd: '..' });
+  await fs.writeFile(configPath, JSON.stringify(config, null, 2));
+
+  // Use the virtual environment's Python interpreter
+  // Set cwd to project root so main.py can find config.json and other files
+  pythonProcess = spawn(pythonPath, [mainPyPath], {
+    cwd: projectRoot
+  });
 
   const stream = new ReadableStream({
     start(controller) {

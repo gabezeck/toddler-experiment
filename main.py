@@ -25,14 +25,14 @@ web_surfer = WebSurferAgent(
     browser_config={"viewport_size": 1024},
 )
 
-# Create the two "child" agents. We tell them they can use the web_surfer to get information.
-alex_agent = autogen.AssistantAgent(
+# Create the two agents with dynamic names from config
+agent1 = autogen.AssistantAgent(
     name=agent1_name,
     system_message=agent1_prompt,
     llm_config={"config_list": config_list},
 )
 
-benny_agent = autogen.AssistantAgent(
+agent2 = autogen.AssistantAgent(
     name=agent2_name,
     system_message=agent2_prompt,
     llm_config={"config_list": config_list},
@@ -41,23 +41,21 @@ benny_agent = autogen.AssistantAgent(
 
 # == STEP 3: SET UP THE CONVERSATION ==
 
-# The GroupChat manages the turn-taking between agents
-groupchat = autogen.GroupChat(
-    agents=[alex_agent, benny_agent, web_surfer],
-    messages=[],
-    max_round=20 # Set a limit for the conversation
-)
+print(f"\n🎭 Starting conversation between {agent1_name} and {agent2_name}...")
+print(f"📝 Initial message: {initial_message}\n")
+print("=" * 80)
 
-# The Manager orchestrates the chat
-manager = autogen.GroupChatManager(
-    groupchat=groupchat,
-    llm_config={"config_list": config_list}
-)
-
-# == START THE EXPERIMENT ==
-# We start the chat with an initial prompt from one of the children.
-# The manager will then let the agents talk to each other.
-manager.initiate_chat(
-    alex_agent,
-    message=initial_message
-)
+# Direct two-agent conversation (simpler and more reliable than GroupChat)
+try:
+    agent1.initiate_chat(
+        agent2,
+        message=initial_message,
+        max_turns=20
+    )
+    print("\n" + "=" * 80)
+    print("✅ Conversation completed successfully!")
+except Exception as e:
+    print("\n" + "=" * 80)
+    print(f"❌ Error during conversation: {e}")
+    import traceback
+    traceback.print_exc()
