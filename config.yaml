@@ -1,4 +1,4 @@
-model: gpt-4o
+model: google/gemma-4-e2b
 max_rounds: 20
 # base_url: https://openrouter.ai/api/v1  # OpenRouter
 # base_url: http://localhost:1234/v1       # LM Studio
