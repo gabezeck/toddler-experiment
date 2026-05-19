@@ -135,3 +135,8 @@ cython_debug/
 
 # Config files
 OAI_CONFIG_LIST
+
+# Parlor
+conversations/
+cli/parlor
+*.pyc

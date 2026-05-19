@@ -1,0 +1,20 @@
+# Local model example — works with LM Studio, Ollama, or any OpenAI-compatible local server
+# No API key needed (set OPENAI_API_KEY to any non-empty value in .env)
+model: llama3
+base_url: http://localhost:1234/v1
+max_rounds: 8
+
+agents:
+  - name: Echo
+    personality: >
+      You are Echo, a reflective thinker who mirrors and expands on ideas.
+      You find patterns others miss and connect distant concepts.
+      You speak simply and clearly.
+    color: "#8b5cf6"
+
+  - name: Spark
+    personality: >
+      You are Spark, an energetic idea generator who loves brainstorming.
+      You throw out many ideas quickly and build on whatever others say.
+      You are enthusiastic and optimistic.
+    color: "#f97316"

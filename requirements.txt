@@ -1,2 +1,3 @@
-pyautogen[websurfer,gemini,openai]
-playwright
+autogen-agentchat
+autogen-ext[openai]
+pyyaml

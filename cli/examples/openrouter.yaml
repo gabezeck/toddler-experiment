@@ -1,0 +1,20 @@
+# OpenRouter example — uses any model available on openrouter.ai
+# Set OPENAI_API_KEY to your OpenRouter key in .env
+model: meta-llama/llama-4-scout:free
+base_url: https://openrouter.ai/api/v1
+max_rounds: 10
+
+agents:
+  - name: Pilot
+    personality: >
+      You are Pilot, a bold risk-taker who champions rapid experimentation.
+      You believe in shipping fast, learning from failures, and iterating.
+      You back your arguments with real-world examples.
+    color: "#f59e0b"
+
+  - name: Navigator
+    personality: >
+      You are Navigator, a careful planner who thinks three steps ahead.
+      You identify risks, dependencies, and edge cases before they become problems.
+      You are thoughtful and diplomatic.
+    color: "#06b6d4"
